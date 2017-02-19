@@ -16,10 +16,10 @@ def mnist_features_labels(n_labels):
     # In order to make quizzes run faster, we're only looking at 10000 images
     for mnist_feature, mnist_label in zip(*mnist.train.next_batch(10000)):
 
-    	# Add features and labels if it's for the first <n>th labels.
+    # Add features and labels if it's for the first <n>th labels.
     	if mnist_label[:n_labels].any():
-    		mnist_features.append(mnist_feature)
-    		mnist_labels.append(mnist_label[:n_labels])
+            mnist_features.append(mnist_feature)
+            mnist_labels.append(mnist_label[:n_labels])
 
     return mnist_features, mnist_labels
 
@@ -43,9 +43,9 @@ logits = linear(features, w, b)
 train_features, train_labels = mnist_features_labels(n_labels)
 
 with tf.Session() as sess:
-	# Initialize session variables
-	init = tf.global_variables_initializer()
-	sess.run(init)
+    # Initialize session variables
+    init = tf.global_variables_initializer()
+    sess.run(init)
     
     # Softmax
     prediction = tf.nn.softmax(logits)
@@ -64,7 +64,7 @@ with tf.Session() as sess:
     optimizer = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)
 
     # Run optimizer and get loss
-    _, l = sess.run([optimizer, loss], fead_dict = {features: train_features, labels: train_labels})
+    _, l = sess.run([optimizer, loss], feed_dict = {features: train_features, labels: train_labels})
 
 # Print loss
 print('Loss: {}'.format(l))
